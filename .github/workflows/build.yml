@@ -1,0 +1,26 @@
+name: Build and Upload
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build with Makefile
+      run: make
+
+    - name: Upload built binary
+      uses: actions/upload-artifact@v2
+      with:
+        name: binary-hello
+        path: ./hello
